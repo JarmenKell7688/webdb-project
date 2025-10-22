@@ -12,5 +12,8 @@ namespace WebApplication2.Data
         }
 
         public DbSet<Student> Students { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<GatePass> GatePasses { get; set; }
+        public DbSet<LockerRequest> LockerRequests { get; set; }
     }
 }
