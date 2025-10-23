@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container mt-4">
+    <h2>Admin Dashboard</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Faculty Management</h5>
+                    <p class="card-text">Create and manage faculty accounts</p>
+                    <a href="@Url.Action("CreateFaculty", "Admin")" class="btn btn-primary">Create Faculty Account</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Students</h5>
+                    <p class="card-text">View and manage all students</p>
+                    <a href="@Url.Action("Index", "Students")" class="btn btn-primary">View Students</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Reservations</h5>
+                    <p class="card-text">View and approve reservations</p>
+                    <a href="@Url.Action("Index", "Reservations")" class="btn btn-primary">View Reservations</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Gate Passes</h5>
+                    <p class="card-text">View and approve gate passes</p>
+                    <a href="@Url.Action("Index", "GatePasses")" class="btn btn-primary">View Gate Passes</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Locker Requests</h5>
+                    <p class="card-text">View and approve locker requests</p>
+                    <a href="@Url.Action("Index", "LockerRequests")" class="btn btn-primary">View Locker Requests</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
