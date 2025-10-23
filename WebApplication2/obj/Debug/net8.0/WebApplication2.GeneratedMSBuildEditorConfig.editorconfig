@@ -188,12 +188,72 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/John Vill/OneDrive/Desktop/web database/webdb-project/WebApplication2/Views/GatePasses/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2F0ZVBhc3Nlc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/John Vill/OneDrive/Desktop/web database/webdb-project/WebApplication2/Views/GatePasses/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2F0ZVBhc3Nlc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/John Vill/OneDrive/Desktop/web database/webdb-project/WebApplication2/Views/GatePasses/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2F0ZVBhc3Nlc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/John Vill/OneDrive/Desktop/web database/webdb-project/WebApplication2/Views/GatePasses/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2F0ZVBhc3Nlc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/John Vill/OneDrive/Desktop/web database/webdb-project/WebApplication2/Views/GatePasses/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2F0ZVBhc3Nlc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/John Vill/OneDrive/Desktop/web database/webdb-project/WebApplication2/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/John Vill/OneDrive/Desktop/web database/webdb-project/WebApplication2/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/John Vill/OneDrive/Desktop/web database/webdb-project/WebApplication2/Views/LockerRequests/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9ja2VyUmVxdWVzdHNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/John Vill/OneDrive/Desktop/web database/webdb-project/WebApplication2/Views/LockerRequests/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9ja2VyUmVxdWVzdHNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/John Vill/OneDrive/Desktop/web database/webdb-project/WebApplication2/Views/LockerRequests/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9ja2VyUmVxdWVzdHNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/John Vill/OneDrive/Desktop/web database/webdb-project/WebApplication2/Views/LockerRequests/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9ja2VyUmVxdWVzdHNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/John Vill/OneDrive/Desktop/web database/webdb-project/WebApplication2/Views/LockerRequests/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9ja2VyUmVxdWVzdHNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/John Vill/OneDrive/Desktop/web database/webdb-project/WebApplication2/Views/Reservations/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25zXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/John Vill/OneDrive/Desktop/web database/webdb-project/WebApplication2/Views/Reservations/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25zXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/John Vill/OneDrive/Desktop/web database/webdb-project/WebApplication2/Views/Reservations/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25zXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/John Vill/OneDrive/Desktop/web database/webdb-project/WebApplication2/Views/Reservations/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25zXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/John Vill/OneDrive/Desktop/web database/webdb-project/WebApplication2/Views/Reservations/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25zXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/John Vill/OneDrive/Desktop/web database/webdb-project/WebApplication2/Views/Shared/Error.cshtml]
