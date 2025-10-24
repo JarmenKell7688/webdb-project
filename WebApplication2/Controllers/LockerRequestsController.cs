@@ -63,6 +63,8 @@ namespace WebApplication2.Controllers
         {
             if (ModelState.IsValid)
             {
+                lockerRequest.StudentId = 1; // Temporary - we'll link to actual user later
+                lockerRequest.Status = "Pending";
                 _context.Add(lockerRequest);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

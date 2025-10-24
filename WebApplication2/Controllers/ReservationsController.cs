@@ -63,6 +63,8 @@ namespace WebApplication2.Controllers
         {
             if (ModelState.IsValid)
             {
+                reservation.StudentId = 1; // Temporary - we'll link to actual user later
+                reservation.Status = "Pending";
                 _context.Add(reservation);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

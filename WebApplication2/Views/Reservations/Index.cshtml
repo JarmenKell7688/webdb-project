@@ -13,9 +13,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Student)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.ApplicationDate)
             </th>
             <th>
@@ -58,14 +55,12 @@
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student.Email)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ApplicationDate)
             </td>
@@ -113,6 +108,25 @@
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
+                <td>
+                    @if (User.IsInRole("Admin") && item.Status == "Pending")
+                    {
+                        <form method="post" asp-controller="Admin" asp-action="ApproveReservation" asp-route-id="@item.Id" style="display:inline;">
+                            <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                        </form>
+                        <form method="post" asp-controller="Admin" asp-action="DenyReservation" asp-route-id="@item.Id" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Deny</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <span class="badge bg-@(item.Status == "Approved" ? "success" : item.Status == "Denied" ? "danger" : "warning")">@item.Status</span>
+                    }
+
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
         </tr>
 }
     </tbody>

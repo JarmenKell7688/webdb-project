@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2.Models;
+using WebApplication2.Data;
 
 namespace WebApplication2.Controllers
 {
@@ -9,10 +10,13 @@ namespace WebApplication2.Controllers
     public class AdminController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly ApplicationDbContext _context;
 
-        public AdminController(UserManager<IdentityUser> userManager)
+        // Updated constructor - includes both UserManager and Context
+        public AdminController(UserManager<IdentityUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -56,6 +60,90 @@ namespace WebApplication2.Controllers
             }
 
             return View();
+        }
+
+        // Approve Reservation
+        [HttpPost]
+        public async Task<IActionResult> ApproveReservation(int id)
+        {
+            var reservation = await _context.Reservations.FindAsync(id);
+            if (reservation != null)
+            {
+                reservation.Status = "Approved";
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Reservation approved!";
+            }
+            return RedirectToAction("Index", "Reservations");
+        }
+
+        // Deny Reservation
+        [HttpPost]
+        public async Task<IActionResult> DenyReservation(int id)
+        {
+            var reservation = await _context.Reservations.FindAsync(id);
+            if (reservation != null)
+            {
+                reservation.Status = "Denied";
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Reservation denied!";
+            }
+            return RedirectToAction("Index", "Reservations");
+        }
+
+        // Approve Gate Pass
+        [HttpPost]
+        public async Task<IActionResult> ApproveGatePass(int id)
+        {
+            var gatePass = await _context.GatePasses.FindAsync(id);
+            if (gatePass != null)
+            {
+                gatePass.Status = "Approved";
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Gate pass approved!";
+            }
+            return RedirectToAction("Index", "GatePasses");
+        }
+
+        // Deny Gate Pass
+        [HttpPost]
+        public async Task<IActionResult> DenyGatePass(int id)
+        {
+            var gatePass = await _context.GatePasses.FindAsync(id);
+            if (gatePass != null)
+            {
+                gatePass.Status = "Denied";
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Gate pass denied!";
+            }
+            return RedirectToAction("Index", "GatePasses");
+        }
+
+        // Approve Locker Request
+        [HttpPost]
+        public async Task<IActionResult> ApproveLockerRequest(int id)
+        {
+            var locker = await _context.LockerRequests.FindAsync(id);
+            if (locker != null)
+            {
+                locker.Status = "Approved";
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Locker request approved!";
+            }
+            return RedirectToAction("Index", "LockerRequests");
+        }
+
+        // Deny Locker Request
+        [HttpPost]
+        public async Task<IActionResult> DenyLockerRequest(int id)
+        {
+            var locker = await _context.LockerRequests.FindAsync(id);
+            if (locker != null)
+            {
+                locker.Status = "Denied";
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Locker request denied!";
+            }
+            return RedirectToAction("Index", "LockerRequests");
         }
     }
 }

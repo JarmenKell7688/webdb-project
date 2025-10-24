@@ -63,6 +63,8 @@ namespace WebApplication2.Controllers
         {
             if (ModelState.IsValid)
             {
+                gatePass.StudentId = 1; // Temporary - we'll link to actual user later
+                gatePass.Status = "Pending";
                 _context.Add(gatePass);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
