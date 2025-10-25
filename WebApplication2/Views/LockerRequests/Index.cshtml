@@ -66,7 +66,9 @@
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
-                <td>
+            <td>
+                @if (User.IsInRole("Admin") || User.Identity.Name == item.CreatedBy)
+                {
                     @if (User.IsInRole("Admin") && item.Status == "Pending")
                     {
                         <form method="post" asp-controller="Admin" asp-action="ApproveLockerRequest" asp-route-id="@item.Id" style="display:inline;">
@@ -84,7 +86,12 @@
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
-                </td>
+                }
+                else
+                {
+                    <span class="badge bg-@(item.Status == "Approved" ? "success" : item.Status == "Denied" ? "danger" : "warning")">@item.Status</span>
+                }
+            </td>
         </tr>
 }
     </tbody>

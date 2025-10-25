@@ -65,10 +65,12 @@ namespace WebApplication2.Controllers
             {
                 lockerRequest.StudentId = 1; // Temporary - we'll link to actual user later
                 lockerRequest.Status = "Pending";
+                lockerRequest.CreatedBy = User.Identity.Name;
                 _context.Add(lockerRequest);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", lockerRequest.StudentId);
             return View(lockerRequest);
         }
@@ -87,7 +89,7 @@ namespace WebApplication2.Controllers
                 return NotFound();
             }
 
-            if (!CanModify(id)) return Forbid();
+            if (id == null || !CanModify(id.Value, lockerRequest.CreatedBy)) return Forbid();
 
             ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", lockerRequest.StudentId);
             return View(lockerRequest);
@@ -145,8 +147,7 @@ namespace WebApplication2.Controllers
                 return NotFound();
             }
 
-            if (!CanModify(id)) return Forbid();
-
+            if (id == null || !CanModify(id.Value, lockerRequest.CreatedBy)) return Forbid();
             return View(lockerRequest);
         }
 
@@ -170,11 +171,10 @@ namespace WebApplication2.Controllers
             return _context.LockerRequests.Any(e => e.Id == id);
         }
 
-        private bool CanModify(int id)
+        private bool CanModify(int id, string createdBy)
         {
             if (User.IsInRole("Admin")) return true;
-            // For now, allow all authenticated users
-            return true;
+            return User.Identity.Name == createdBy;
         }
     }
 }

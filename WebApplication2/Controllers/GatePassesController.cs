@@ -65,6 +65,7 @@ namespace WebApplication2.Controllers
             {
                 gatePass.StudentId = 1; // Temporary - we'll link to actual user later
                 gatePass.Status = "Pending";
+                gatePass.CreatedBy = User.Identity.Name;
                 _context.Add(gatePass);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -87,7 +88,7 @@ namespace WebApplication2.Controllers
                 return NotFound();
             }
 
-            if (!CanModify(id)) return Forbid();
+            if (id == null || !CanModify(id.Value, gatePass.CreatedBy)) return Forbid();
 
             ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", gatePass.StudentId);
             return View(gatePass);
@@ -145,7 +146,7 @@ namespace WebApplication2.Controllers
                 return NotFound();
             }
 
-            if (!CanModify(id)) return Forbid();
+            if (id == null || !CanModify(id.Value, gatePass.CreatedBy)) return Forbid();
 
             return View(gatePass);
         }
@@ -170,11 +171,10 @@ namespace WebApplication2.Controllers
             return _context.GatePasses.Any(e => e.Id == id);
         }
 
-        private bool CanModify(int id)
+        private bool CanModify(int id, string createdBy)
         {
             if (User.IsInRole("Admin")) return true;
-            // For now, allow all authenticated users
-            return true;
+            return User.Identity.Name == createdBy;
         }
     }
 }
