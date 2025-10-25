@@ -49,7 +49,7 @@ namespace WebApplication2.Models
         public string? Speaker { get; set; }
 
         [Required]
-        [Display(Name = "Purpose/Objective")]
+        [Display(Name = "Purpose")]
         public string Purpose { get; set; } = string.Empty;
 
         [Display(Name = "Equipment & Facilities Needed")]
