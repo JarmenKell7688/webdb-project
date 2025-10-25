@@ -1,8 +1,74 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-4">
+    <h2>Welcome, @User.Identity.Name!</h2>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <h3 class="mt-4">Admin Dashboard</h3>
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Pending Reservations</h5>
+                        <h2>@Model.PendingReservations</h2>
+                        <a href="@Url.Action("Index", "Reservations")" class="btn btn-light btn-sm">View All</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Pending Gate Passes</h5>
+                        <h2>@Model.PendingGatePasses</h2>
+                        <a href="@Url.Action("Index", "GatePasses")" class="btn btn-light btn-sm">View All</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Pending Locker Requests</h5>
+                        <h2>@Model.PendingLockerRequests</h2>
+                        <a href="@Url.Action("Index", "LockerRequests")" class="btn btn-light btn-sm">View All</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Reservations</h5>
+                        <p>Create facility reservations</p>
+                        <a href="@Url.Action("Create", "Reservations")" class="btn btn-primary">New Reservation</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Gate Pass</h5>
+                        <p>Apply for gate pass</p>
+                        <a href="@Url.Action("Create", "GatePasses")" class="btn btn-primary">New Gate Pass</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Locker Request</h5>
+                        <p>Request a locker</p>
+                        <a href="@Url.Action("Create", "LockerRequests")" class="btn btn-primary">New Request</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
