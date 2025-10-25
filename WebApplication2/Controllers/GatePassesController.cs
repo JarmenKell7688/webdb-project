@@ -86,6 +86,9 @@ namespace WebApplication2.Controllers
             {
                 return NotFound();
             }
+
+            if (!CanModify(id)) return Forbid();
+
             ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", gatePass.StudentId);
             return View(gatePass);
         }
@@ -142,6 +145,8 @@ namespace WebApplication2.Controllers
                 return NotFound();
             }
 
+            if (!CanModify(id)) return Forbid();
+
             return View(gatePass);
         }
 
@@ -163,6 +168,13 @@ namespace WebApplication2.Controllers
         private bool GatePassExists(int id)
         {
             return _context.GatePasses.Any(e => e.Id == id);
+        }
+
+        private bool CanModify(int id)
+        {
+            if (User.IsInRole("Admin")) return true;
+            // For now, allow all authenticated users
+            return true;
         }
     }
 }

@@ -86,6 +86,9 @@ namespace WebApplication2.Controllers
             {
                 return NotFound();
             }
+
+            if (!CanModify(id)) return Forbid();
+
             ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", reservation.StudentId);
             return View(reservation);
         }
@@ -142,6 +145,8 @@ namespace WebApplication2.Controllers
                 return NotFound();
             }
 
+            if (!CanModify(id)) return Forbid();
+
             return View(reservation);
         }
 
@@ -163,6 +168,13 @@ namespace WebApplication2.Controllers
         private bool ReservationExists(int id)
         {
             return _context.Reservations.Any(e => e.Id == id);
+        }
+
+        private bool CanModify(int id)
+        {
+            if (User.IsInRole("Admin")) return true;
+            // For now, allow all authenticated users
+            return true;
         }
     }
 }
