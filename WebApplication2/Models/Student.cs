@@ -27,7 +27,7 @@ namespace WebApplication2.Models
 
         [Required]
         [Display(Name = "Year Level")]
-        [Range(1, 5)]
+        [Range(1, 4, ErrorMessage = "Year Level must be between 1 and 4")]
         public int YearLevel { get; set; }
     }
 }
