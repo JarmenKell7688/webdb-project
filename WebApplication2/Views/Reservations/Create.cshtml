@@ -4,90 +4,110 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Reservation</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="container mt-4">
+        <h2>Create Reservation</h2>
+
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-     
-            <div class="form-group">
-                <label asp-for="ApplicationDate" class="control-label"></label>
-                <input asp-for="ApplicationDate" class="form-control" />
-                <span asp-validation-for="ApplicationDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OrganizationName" class="control-label"></label>
-                <input asp-for="OrganizationName" class="form-control" />
-                <span asp-validation-for="OrganizationName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ActivityTitle" class="control-label"></label>
-                <input asp-for="ActivityTitle" class="form-control" />
-                <span asp-validation-for="ActivityTitle" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Venue" class="control-label"></label>
-                <input asp-for="Venue" class="form-control" />
-                <span asp-validation-for="Venue" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateNeeded" class="control-label"></label>
-                <input asp-for="DateNeeded" class="form-control" />
-                <span asp-validation-for="DateNeeded" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TimeFrom" class="control-label"></label>
-                <input asp-for="TimeFrom" class="form-control" />
-                <span asp-validation-for="TimeFrom" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TimeTo" class="control-label"></label>
-                <input asp-for="TimeTo" class="form-control" />
-                <span asp-validation-for="TimeTo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Participants" class="control-label"></label>
-                <input asp-for="Participants" class="form-control" />
-                <span asp-validation-for="Participants" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Speaker" class="control-label"></label>
-                <input asp-for="Speaker" class="form-control" />
-                <span asp-validation-for="Speaker" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Purpose" class="control-label"></label>
-                <input asp-for="Purpose" class="form-control" />
-                <span asp-validation-for="Purpose" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EquipmentNeeded" class="control-label"></label>
-                <input asp-for="EquipmentNeeded" class="form-control" />
-                <span asp-validation-for="EquipmentNeeded" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NatureOfActivity" class="control-label"></label>
-                <input asp-for="NatureOfActivity" class="form-control" />
-                <span asp-validation-for="NatureOfActivity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SourceOfFunds" class="control-label"></label>
-                <input asp-for="SourceOfFunds" class="form-control" />
-                <span asp-validation-for="SourceOfFunds" class="text-danger"></span>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="ApplicationDate" class="form-label"></label>
+                    <input asp-for="ApplicationDate" class="form-control" type="date" />
+                    <span asp-validation-for="ApplicationDate" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="OrganizationName" class="form-label"></label>
+                    <input asp-for="OrganizationName" class="form-control" />
+                    <span asp-validation-for="OrganizationName" class="text-danger"></span>
+                </div>
             </div>
 
-            <div class="form-group">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="ActivityTitle" class="form-label"></label>
+                    <input asp-for="ActivityTitle" class="form-control" />
+                    <span asp-validation-for="ActivityTitle" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Venue" class="form-label"></label>
+                    <input asp-for="Venue" class="form-control" />
+                    <span asp-validation-for="Venue" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label asp-for="DateNeeded" class="form-label"></label>
+                    <input asp-for="DateNeeded" class="form-control" type="date" />
+                    <span asp-validation-for="DateNeeded" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label asp-for="TimeFrom" class="form-label"></label>
+                    <input asp-for="TimeFrom" class="form-control" type="time" />
+                    <span asp-validation-for="TimeFrom" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label asp-for="TimeTo" class="form-label"></label>
+                    <input asp-for="TimeTo" class="form-control" type="time" />
+                    <span asp-validation-for="TimeTo" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Participants" class="form-label"></label>
+                    <input asp-for="Participants" class="form-control" />
+                    <span asp-validation-for="Participants" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Speaker" class="form-label"></label>
+                    <input asp-for="Speaker" class="form-control" />
+                    <span asp-validation-for="Speaker" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Purpose" class="form-label"></label>
+                    <textarea asp-for="Purpose" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Purpose" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="EquipmentNeeded" class="form-label"></label>
+                    <textarea asp-for="EquipmentNeeded" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="EquipmentNeeded" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="NatureOfActivity" class="form-label"></label>
+                    <input asp-for="NatureOfActivity" class="form-control" />
+                    <span asp-validation-for="NatureOfActivity" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="SourceOfFunds" class="form-label"></label>
+                    <input asp-for="SourceOfFunds" class="form-control" />
+                    <span asp-validation-for="SourceOfFunds" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

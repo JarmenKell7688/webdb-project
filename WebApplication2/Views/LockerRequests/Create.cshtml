@@ -4,55 +4,62 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>LockerRequest</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="container mt-4">
+        <h2>Create Locker Request</h2>
+
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdNumber" class="control-label"></label>
-                <input asp-for="IdNumber" class="form-control" />
-                <span asp-validation-for="IdNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LockerNumber" class="control-label"></label>
-                <input asp-for="LockerNumber" class="form-control" />
-                <span asp-validation-for="LockerNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Semester" class="control-label"></label>
-                <input asp-for="Semester" class="form-control" />
-                <span asp-validation-for="Semester" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ContactNumber" class="control-label"></label>
-                <input asp-for="ContactNumber" class="form-control" />
-                <span asp-validation-for="ContactNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ApplicationDate" class="control-label"></label>
-                <input asp-for="ApplicationDate" class="form-control" />
-                <span asp-validation-for="ApplicationDate" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="IdNumber" class="form-label"></label>
+                    <input asp-for="IdNumber" class="form-control" />
+                    <span asp-validation-for="IdNumber" class="text-danger"></span>
+                </div>
             </div>
 
-            <div class="form-group">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="LockerNumber" class="form-label"></label>
+                    <input asp-for="LockerNumber" class="form-control" />
+                    <span asp-validation-for="LockerNumber" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Semester" class="form-label"></label>
+                    <input asp-for="Semester" class="form-control" />
+                    <span asp-validation-for="Semester" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="ContactNumber" class="form-label"></label>
+                    <input asp-for="ContactNumber" class="form-control" />
+                    <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="ApplicationDate" class="form-label"></label>
+                    <input asp-for="ApplicationDate" class="form-control" type="date" />
+                    <span asp-validation-for="ApplicationDate" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
