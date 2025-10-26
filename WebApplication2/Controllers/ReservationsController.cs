@@ -111,6 +111,12 @@ namespace WebApplication2.Controllers
             {
                 try
                 {
+                    // Get the original record to preserve CreatedBy
+                    var existingRequest = await _context.Reservations.AsNoTracking().FirstOrDefaultAsync(l => l.Id == id);
+
+                    // Preserve the original CreatedBy
+                    reservation.CreatedBy = existingRequest.CreatedBy;
+
                     _context.Update(reservation);
                     await _context.SaveChangesAsync();
                 }

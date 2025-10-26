@@ -110,6 +110,12 @@ namespace WebApplication2.Controllers
             {
                 try
                 {
+                    // Get the original record to preserve CreatedBy
+                    var existingRequest = await _context.GatePasses.AsNoTracking().FirstOrDefaultAsync(l => l.Id == id);
+
+                    // Preserve the original CreatedBy
+                    gatePass.CreatedBy = existingRequest.CreatedBy;
+
                     _context.Update(gatePass);
                     await _context.SaveChangesAsync();
                 }

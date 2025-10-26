@@ -111,6 +111,12 @@ namespace WebApplication2.Controllers
             {
                 try
                 {
+                    // Get the original record to preserve CreatedBy
+                    var existingRequest = await _context.LockerRequests.AsNoTracking().FirstOrDefaultAsync(l => l.Id == id);
+
+                    // Preserve the original CreatedBy
+                    lockerRequest.CreatedBy = existingRequest.CreatedBy;
+
                     _context.Update(lockerRequest);
                     await _context.SaveChangesAsync();
                 }
