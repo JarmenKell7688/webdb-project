@@ -22,6 +22,27 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Faculty Management</h5>
+                        <p class="card-text">Create and manage faculty accounts</p>
+                        <a href="@Url.Action("CreateFaculty", "Admin")" class="btn btn-primary">Create Faculty Account</a>
+                        <a href="@Url.Action("Faculty", "Admin")" class="btn btn-secondary mt-2">View All Faculty</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Students</h5>
+                        <p class="card-text">View and manage all students</p>
+                        <a href="@Url.Action("Index", "Students")" class="btn btn-primary">View Students</a>
+                    </div>
+                </div>
+            </div>
 
         <div class="col-md-4">
             <div class="card">

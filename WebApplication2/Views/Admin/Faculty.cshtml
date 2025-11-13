@@ -1,0 +1,48 @@
+﻿@model IEnumerable<WebApplication2.Models.ApplicationUser>
+
+@{
+    ViewData["Title"] = "Faculty";
+}
+
+<h1>Faculty</h1>
+
+<p>
+    <a asp-action="CreateFaculty" class="btn btn-primary">Create New Faculty</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Employee ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var faculty in Model)
+            {
+                <tr>
+                    <td>@(faculty.EmployeeId ?? "N/A")</td>
+                    <td>@(faculty.FirstName ?? "N/A")</td>
+                    <td>@(faculty.LastName ?? "N/A")</td>
+                    <td>@(faculty.Email ?? "N/A")</td>
+                    <td>@(faculty.Department ?? "N/A")</td>
+                    <td>
+                        <a href="#" class="btn btn-sm btn-info">Details</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">No faculty members found</td>
+            </tr>
+        }
+    </tbody>
+</table>

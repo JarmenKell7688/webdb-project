@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication2.Models;
+using Microsoft.EntityFrameworkCore;
 using WebApplication2.Data;
+using WebApplication2.Models;
 
 namespace WebApplication2.Controllers
 {
@@ -30,11 +31,12 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateFaculty(string email, string password, string firstName, string lastName)
+        public async Task<IActionResult> CreateFaculty(string email, string password, string firstName, string lastName, string department, string employeeId)
         {
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) ||
+                string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName))
             {
-                ModelState.AddModelError("", "Email and password are required");
+                ModelState.AddModelError("", "Email, password, first name, and last name are required");
                 return View();
             }
 
@@ -42,7 +44,11 @@ namespace WebApplication2.Controllers
             {
                 UserName = email,
                 Email = email,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                FirstName = firstName,
+                LastName = lastName,
+                Department = department,
+                EmployeeId = (300000 + new Random().Next(1, 100000)).ToString()
             };
 
             var result = await _userManager.CreateAsync(user, password);
@@ -144,6 +150,22 @@ namespace WebApplication2.Controllers
                 TempData["Success"] = "Locker request denied!";
             }
             return RedirectToAction("Index", "LockerRequests");
+        }
+
+        public async Task<IActionResult> Faculty()
+        {
+            var faculty = new List<ApplicationUser>();
+            var allUsers = await _userManager.Users.ToListAsync();
+
+            foreach (var user in allUsers)
+            {
+                if (await _userManager.IsInRoleAsync(user, "Faculty"))
+                {
+                    faculty.Add(user);
+                }
+            }
+
+            return View(faculty);
         }
     }
 }
