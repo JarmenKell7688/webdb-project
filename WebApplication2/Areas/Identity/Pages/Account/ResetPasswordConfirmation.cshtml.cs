@@ -4,6 +4,7 @@
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using WebApplication2.Models;
 
 namespace WebApplication2.Areas.Identity.Pages.Account
 {

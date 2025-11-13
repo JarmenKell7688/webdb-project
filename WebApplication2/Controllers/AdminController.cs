@@ -9,11 +9,11 @@ namespace WebApplication2.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
         // Updated constructor - includes both UserManager and Context
-        public AdminController(UserManager<IdentityUser> userManager, ApplicationDbContext context)
+        public AdminController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _context = context;
@@ -38,7 +38,7 @@ namespace WebApplication2.Controllers
                 return View();
             }
 
-            var user = new IdentityUser
+            var user = new ApplicationUser
             {
                 UserName = email,
                 Email = email,

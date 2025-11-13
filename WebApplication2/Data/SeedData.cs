@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using WebApplication2.Models;
 
 namespace WebApplication2.Data
 {
     public static class SeedData
     {
-        public static async Task Initialize(IServiceProvider serviceProvider, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task Initialize(IServiceProvider serviceProvider, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             // Create roles
             string[] roleNames = { "Admin", "Faculty", "Student" };
@@ -24,7 +25,7 @@ namespace WebApplication2.Data
 
             if (adminUser == null)
             {
-                var newAdmin = new IdentityUser
+                var newAdmin = new ApplicationUser
                 {
                     UserName = adminEmail,
                     Email = adminEmail,

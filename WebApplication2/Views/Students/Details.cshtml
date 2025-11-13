@@ -1,54 +1,38 @@
-﻿@model WebApplication2.Models.Student
+﻿@model WebApplication2.Models.ApplicationUser
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Student Details";
 }
 
-<h1>Details</h1>
+<h1>Student Details</h1>
 
-<div>
-    <h4>Student</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StudentId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StudentId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Program)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Program)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.YearLevel)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.YearLevel)
-        </dd>
-    </dl>
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Student Number</dt>
+            <dd class="col-sm-9">@(Model.StudentNumber ?? "Not assigned")</dd>
+
+            <dt class="col-sm-3">First Name</dt>
+            <dd class="col-sm-9">@(Model.FirstName ?? "N/A")</dd>
+
+            <dt class="col-sm-3">Last Name</dt>
+            <dd class="col-sm-9">@(Model.LastName ?? "N/A")</dd>
+
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@(Model.Email ?? "N/A")</dd>
+
+            <dt class="col-sm-3">Program</dt>
+            <dd class="col-sm-9">@(Model.Program ?? "Not specified")</dd>
+
+            <dt class="col-sm-3">Year Level</dt>
+            <dd class="col-sm-9">@(Model.YearLevel?.ToString() ?? "Not specified")</dd>
+
+            <dt class="col-sm-3">Username</dt>
+            <dd class="col-sm-9">@(Model.UserName ?? "N/A")</dd>
+        </dl>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="mt-3">
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>
