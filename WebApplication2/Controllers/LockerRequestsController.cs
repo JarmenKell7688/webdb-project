@@ -25,7 +25,7 @@ namespace WebApplication2.Controllers
         // GET: LockerRequests
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.LockerRequests.Include(l => l.Student);
+            var applicationDbContext = _context.LockerRequests.Include(l => l.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -38,7 +38,7 @@ namespace WebApplication2.Controllers
             }
 
             var lockerRequest = await _context.LockerRequests
-                .Include(l => l.Student)
+                .Include(l => l.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (lockerRequest == null)
             {
@@ -147,7 +147,7 @@ namespace WebApplication2.Controllers
             }
 
             var lockerRequest = await _context.LockerRequests
-                .Include(l => l.Student)
+                .Include(l => l.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (lockerRequest == null)
             {

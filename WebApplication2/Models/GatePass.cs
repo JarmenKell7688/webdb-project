@@ -12,8 +12,6 @@ namespace WebApplication2.Models
 
         public ApplicationUser? User { get; set; }
 
-        public Student? Student { get; set; }
-
         [Required]
         [Display(Name = "Application for School Year")]
         public string SchoolYear { get; set; } = string.Empty;

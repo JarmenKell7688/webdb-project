@@ -12,8 +12,8 @@ using WebApplication2.Data;
 namespace WebApplication2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251114012859_LinkRequestsToApplicationUser")]
-    partial class LinkRequestsToApplicationUser
+    [Migration("20251114074310_FixUserReferences")]
+    partial class FixUserReferences
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -302,9 +302,6 @@ namespace WebApplication2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("StudentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -318,8 +315,6 @@ namespace WebApplication2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
 
                     b.HasIndex("UserId");
 
@@ -364,16 +359,11 @@ namespace WebApplication2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("StudentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
 
                     b.HasIndex("UserId");
 
@@ -431,9 +421,6 @@ namespace WebApplication2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("StudentId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("TimeFrom")
                         .HasColumnType("datetime2");
 
@@ -449,8 +436,6 @@ namespace WebApplication2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
 
                     b.HasIndex("UserId");
 
@@ -546,51 +531,33 @@ namespace WebApplication2.Migrations
 
             modelBuilder.Entity("WebApplication2.Models.GatePass", b =>
                 {
-                    b.HasOne("WebApplication2.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId");
-
                     b.HasOne("WebApplication2.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Student");
 
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("WebApplication2.Models.LockerRequest", b =>
                 {
-                    b.HasOne("WebApplication2.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId");
-
                     b.HasOne("WebApplication2.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Student");
 
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("WebApplication2.Models.Reservation", b =>
                 {
-                    b.HasOne("WebApplication2.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId");
-
                     b.HasOne("WebApplication2.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Student");
 
                     b.Navigation("User");
                 });

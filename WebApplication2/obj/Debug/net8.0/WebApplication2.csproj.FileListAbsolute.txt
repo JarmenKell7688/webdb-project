@@ -287,7 +287,6 @@ C:\Users\John Vill\OneDrive\Desktop\web database\webdb-project\WebApplication2\o
 C:\Users\John Vill\OneDrive\Desktop\web database\webdb-project\WebApplication2\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\John Vill\OneDrive\Desktop\web database\webdb-project\WebApplication2\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\John Vill\OneDrive\Desktop\web database\webdb-project\WebApplication2\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\John Vill\OneDrive\Desktop\web database\webdb-project\WebApplication2\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\John Vill\OneDrive\Desktop\web database\webdb-project\WebApplication2\obj\Debug\net8.0\WebAppli.0DB3FC1A.Up2Date
 C:\Users\John Vill\OneDrive\Desktop\web database\webdb-project\WebApplication2\obj\Debug\net8.0\WebApplication2.dll
 C:\Users\John Vill\OneDrive\Desktop\web database\webdb-project\WebApplication2\obj\Debug\net8.0\refint\WebApplication2.dll

@@ -5,7 +5,9 @@ namespace WebApplication2.Data
 {
     public static class SeedData
     {
-        public static async Task Initialize(IServiceProvider serviceProvider, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task Initialize(IServiceProvider serviceProvider, 
+            UserManager<ApplicationUser> userManager, 
+            RoleManager<IdentityRole> roleManager)
         {
             // Create roles
             string[] roleNames = { "Admin", "Faculty", "Student" };
@@ -29,7 +31,9 @@ namespace WebApplication2.Data
                 {
                     UserName = adminEmail,
                     Email = adminEmail,
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+                    FirstName = "Admin",
+                    LastName = "User"
                 };
 
                 var result = await userManager.CreateAsync(newAdmin, "Admin@123");

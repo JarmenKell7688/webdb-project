@@ -5,7 +5,7 @@
 namespace WebApplication2.Migrations
 {
     /// <inheritdoc />
-    public partial class LinkRequestsToApplicationUser : Migration
+    public partial class FixUserReferences : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,13 +22,29 @@ namespace WebApplication2.Migrations
                 name: "FK_Reservations_Students_StudentId",
                 table: "Reservations");
 
-            migrationBuilder.AlterColumn<int>(
+            migrationBuilder.DropIndex(
+                name: "IX_Reservations_StudentId",
+                table: "Reservations");
+
+            migrationBuilder.DropIndex(
+                name: "IX_LockerRequests_StudentId",
+                table: "LockerRequests");
+
+            migrationBuilder.DropIndex(
+                name: "IX_GatePasses_StudentId",
+                table: "GatePasses");
+
+            migrationBuilder.DropColumn(
                 name: "StudentId",
-                table: "Reservations",
-                type: "int",
-                nullable: true,
-                oldClrType: typeof(int),
-                oldType: "int");
+                table: "Reservations");
+
+            migrationBuilder.DropColumn(
+                name: "StudentId",
+                table: "LockerRequests");
+
+            migrationBuilder.DropColumn(
+                name: "StudentId",
+                table: "GatePasses");
 
             migrationBuilder.AddColumn<string>(
                 name: "UserId",
@@ -37,28 +53,12 @@ namespace WebApplication2.Migrations
                 nullable: false,
                 defaultValue: "");
 
-            migrationBuilder.AlterColumn<int>(
-                name: "StudentId",
-                table: "LockerRequests",
-                type: "int",
-                nullable: true,
-                oldClrType: typeof(int),
-                oldType: "int");
-
             migrationBuilder.AddColumn<string>(
                 name: "UserId",
                 table: "LockerRequests",
                 type: "nvarchar(450)",
                 nullable: false,
                 defaultValue: "");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "StudentId",
-                table: "GatePasses",
-                type: "int",
-                nullable: true,
-                oldClrType: typeof(int),
-                oldType: "int");
 
             migrationBuilder.AddColumn<string>(
                 name: "UserId",
@@ -91,13 +91,6 @@ namespace WebApplication2.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_GatePasses_Students_StudentId",
-                table: "GatePasses",
-                column: "StudentId",
-                principalTable: "Students",
-                principalColumn: "Id");
-
-            migrationBuilder.AddForeignKey(
                 name: "FK_LockerRequests_AspNetUsers_UserId",
                 table: "LockerRequests",
                 column: "UserId",
@@ -106,26 +99,12 @@ namespace WebApplication2.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_LockerRequests_Students_StudentId",
-                table: "LockerRequests",
-                column: "StudentId",
-                principalTable: "Students",
-                principalColumn: "Id");
-
-            migrationBuilder.AddForeignKey(
                 name: "FK_Reservations_AspNetUsers_UserId",
                 table: "Reservations",
                 column: "UserId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Reservations_Students_StudentId",
-                table: "Reservations",
-                column: "StudentId",
-                principalTable: "Students",
-                principalColumn: "Id");
         }
 
         /// <inheritdoc />
@@ -136,23 +115,11 @@ namespace WebApplication2.Migrations
                 table: "GatePasses");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_GatePasses_Students_StudentId",
-                table: "GatePasses");
-
-            migrationBuilder.DropForeignKey(
                 name: "FK_LockerRequests_AspNetUsers_UserId",
                 table: "LockerRequests");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_LockerRequests_Students_StudentId",
-                table: "LockerRequests");
-
-            migrationBuilder.DropForeignKey(
                 name: "FK_Reservations_AspNetUsers_UserId",
-                table: "Reservations");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Reservations_Students_StudentId",
                 table: "Reservations");
 
             migrationBuilder.DropIndex(
@@ -179,35 +146,41 @@ namespace WebApplication2.Migrations
                 name: "UserId",
                 table: "GatePasses");
 
-            migrationBuilder.AlterColumn<int>(
+            migrationBuilder.AddColumn<int>(
                 name: "StudentId",
                 table: "Reservations",
                 type: "int",
                 nullable: false,
-                defaultValue: 0,
-                oldClrType: typeof(int),
-                oldType: "int",
-                oldNullable: true);
+                defaultValue: 0);
 
-            migrationBuilder.AlterColumn<int>(
+            migrationBuilder.AddColumn<int>(
                 name: "StudentId",
                 table: "LockerRequests",
                 type: "int",
                 nullable: false,
-                defaultValue: 0,
-                oldClrType: typeof(int),
-                oldType: "int",
-                oldNullable: true);
+                defaultValue: 0);
 
-            migrationBuilder.AlterColumn<int>(
+            migrationBuilder.AddColumn<int>(
                 name: "StudentId",
                 table: "GatePasses",
                 type: "int",
                 nullable: false,
-                defaultValue: 0,
-                oldClrType: typeof(int),
-                oldType: "int",
-                oldNullable: true);
+                defaultValue: 0);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reservations_StudentId",
+                table: "Reservations",
+                column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LockerRequests_StudentId",
+                table: "LockerRequests",
+                column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GatePasses_StudentId",
+                table: "GatePasses",
+                column: "StudentId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_GatePasses_Students_StudentId",

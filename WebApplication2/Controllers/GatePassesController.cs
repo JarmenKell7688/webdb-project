@@ -25,7 +25,7 @@ namespace WebApplication2.Controllers
         // GET: GatePasses
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.GatePasses.Include(g => g.Student);
+            var applicationDbContext = _context.GatePasses.Include(g => g.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -38,7 +38,7 @@ namespace WebApplication2.Controllers
             }
 
             var gatePass = await _context.GatePasses
-                .Include(g => g.Student)
+                .Include(g => g.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (gatePass == null)
             {
@@ -142,7 +142,7 @@ namespace WebApplication2.Controllers
             }
 
             var gatePass = await _context.GatePasses
-                .Include(g => g.Student)
+                .Include(g => g.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (gatePass == null)
             {

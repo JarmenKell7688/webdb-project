@@ -95,8 +95,6 @@ namespace WebApplication2.Controllers
         }
 
         // POST: Reservations/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,ApplicationDate,OrganizationName,ActivityTitle,Venue,DateNeeded,TimeFrom,TimeTo,Participants,Speaker,Purpose,EquipmentNeeded,NatureOfActivity,SourceOfFunds,Status")] Reservation reservation)
@@ -145,7 +143,7 @@ namespace WebApplication2.Controllers
             }
 
             var reservation = await _context.Reservations
-                .Include(r => r.Student)
+                .Include(r => r.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (reservation == null)
             {
