@@ -7,8 +7,10 @@ namespace WebApplication2.Models
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Student ID")]
-        public int StudentId { get; set; }
+        [Display(Name = "User ID")]
+        public string UserId { get; set; } = string.Empty;
+
+        public ApplicationUser? User { get; set; }
 
         public Student? Student { get; set; }
 

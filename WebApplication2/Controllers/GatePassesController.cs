@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using WebApplication2.Data;
 using WebApplication2.Models;
 
@@ -50,27 +51,25 @@ namespace WebApplication2.Controllers
         // GET: GatePasses/Create
         public IActionResult Create()
         {
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email");
+            //ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email");
             return View();
         }
 
         // POST: GatePasses/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,StudentId,SchoolYear,Name,Address,ApplicationDate,StaffType,Department,CourseAndYear,VehiclePlateNo,RegistrationExpiryDate,VehicleType,Maker,Color,Status")] GatePass gatePass)
         {
             if (ModelState.IsValid)
             {
-                gatePass.StudentId = 1; // Temporary - we'll link to actual user later
+                gatePass.UserId= User.FindFirstValue(ClaimTypes.NameIdentifier);
                 gatePass.Status = "Pending";
                 gatePass.CreatedBy = User.Identity.Name;
                 _context.Add(gatePass);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", gatePass.StudentId);
+            //ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", gatePass.UserId);
             return View(gatePass);
         }
 
@@ -90,16 +89,14 @@ namespace WebApplication2.Controllers
 
             if (id == null || !CanModify(id.Value, gatePass.CreatedBy)) return Forbid();
 
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", gatePass.StudentId);
+            //ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", gatePass.UserId);
             return View(gatePass);
         }
 
         // POST: GatePasses/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,StudentId,SchoolYear,Name,Address,ApplicationDate,StaffType,Department,CourseAndYear,VehiclePlateNo,RegistrationExpiryDate,VehicleType,Maker,Color,Status")] GatePass gatePass)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,SchoolYear,Name,Address,ApplicationDate,StaffType,Department,CourseAndYear,VehiclePlateNo,RegistrationExpiryDate,VehicleType,Maker,Color,Status")] GatePass gatePass)
         {
             if (id != gatePass.Id)
             {
@@ -132,7 +129,7 @@ namespace WebApplication2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", gatePass.StudentId);
+           // ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", gatePass.UserId);
             return View(gatePass);
         }
 

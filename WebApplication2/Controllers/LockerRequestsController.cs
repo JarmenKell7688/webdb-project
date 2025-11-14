@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using WebApplication2.Data;
 using WebApplication2.Models;
 
@@ -50,7 +51,7 @@ namespace WebApplication2.Controllers
         // GET: LockerRequests/Create
         public IActionResult Create()
         {
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email");
+            //ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email");
             return View();
         }
 
@@ -63,7 +64,7 @@ namespace WebApplication2.Controllers
         {
             if (ModelState.IsValid)
             {
-                lockerRequest.StudentId = 1; // Temporary - we'll link to actual user later
+                lockerRequest.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 lockerRequest.Status = "Pending";
                 lockerRequest.CreatedBy = User.Identity.Name;
                 _context.Add(lockerRequest);
@@ -71,7 +72,7 @@ namespace WebApplication2.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", lockerRequest.StudentId);
+            //ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", lockerRequest.UserId);
             return View(lockerRequest);
         }
 
@@ -91,7 +92,7 @@ namespace WebApplication2.Controllers
 
             if (id == null || !CanModify(id.Value, lockerRequest.CreatedBy)) return Forbid();
 
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", lockerRequest.StudentId);
+           //ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", lockerRequest.UserId);
             return View(lockerRequest);
         }
 
@@ -100,7 +101,7 @@ namespace WebApplication2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,StudentId,Name,IdNumber,LockerNumber,Semester,ContactNumber,ApplicationDate,Status")] LockerRequest lockerRequest)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Name,IdNumber,LockerNumber,Semester,ContactNumber,ApplicationDate,Status")] LockerRequest lockerRequest)
         {
             if (id != lockerRequest.Id)
             {
@@ -133,7 +134,7 @@ namespace WebApplication2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", lockerRequest.StudentId);
+           //ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", lockerRequest.UserId);
             return View(lockerRequest);
         }
 

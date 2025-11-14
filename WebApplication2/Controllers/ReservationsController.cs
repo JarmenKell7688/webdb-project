@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using WebApplication2.Data;
 using WebApplication2.Models;
 
@@ -24,7 +25,7 @@ namespace WebApplication2.Controllers
         // GET: Reservations
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Reservations.Include(r => r.Student);
+            var applicationDbContext = _context.Reservations.Include(r => r.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -37,7 +38,7 @@ namespace WebApplication2.Controllers
             }
 
             var reservation = await _context.Reservations
-                .Include(r => r.Student)
+                .Include(r => r.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (reservation == null)
             {
@@ -50,20 +51,18 @@ namespace WebApplication2.Controllers
         // GET: Reservations/Create
         public IActionResult Create()
         {
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email");
+            //ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email");
             return View();
         }
 
         // POST: Reservations/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StudentId,ApplicationDate,OrganizationName,ActivityTitle,Venue,DateNeeded,TimeFrom,TimeTo,Participants,Speaker,Purpose,EquipmentNeeded,NatureOfActivity,SourceOfFunds,Status")] Reservation reservation)
+        public async Task<IActionResult> Create([Bind("Id,UserId,ApplicationDate,OrganizationName,ActivityTitle,Venue,DateNeeded,TimeFrom,TimeTo,Participants,Speaker,Purpose,EquipmentNeeded,NatureOfActivity,SourceOfFunds,Status")] Reservation reservation)
         {
             if (ModelState.IsValid)
             {
-                reservation.StudentId = 1; // Temporary - we'll link to actual user later
+                reservation.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 reservation.Status = "Pending";
                 reservation.CreatedBy = User.Identity.Name;
                 _context.Add(reservation);
@@ -71,7 +70,7 @@ namespace WebApplication2.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", reservation.StudentId);
+            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", reservation.UserId);
             return View(reservation);
         }
 
@@ -91,7 +90,7 @@ namespace WebApplication2.Controllers
 
             if (id == null || !CanModify(id.Value, reservation.CreatedBy)) return Forbid();
 
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", reservation.StudentId);
+            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", reservation.UserId);
             return View(reservation);
         }
 
@@ -100,7 +99,7 @@ namespace WebApplication2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,StudentId,ApplicationDate,OrganizationName,ActivityTitle,Venue,DateNeeded,TimeFrom,TimeTo,Participants,Speaker,Purpose,EquipmentNeeded,NatureOfActivity,SourceOfFunds,Status")] Reservation reservation)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,ApplicationDate,OrganizationName,ActivityTitle,Venue,DateNeeded,TimeFrom,TimeTo,Participants,Speaker,Purpose,EquipmentNeeded,NatureOfActivity,SourceOfFunds,Status")] Reservation reservation)
         {
             if (id != reservation.Id)
             {
@@ -133,7 +132,7 @@ namespace WebApplication2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", reservation.StudentId);
+            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Email", reservation.UserId);
             return View(reservation);
         }
 
