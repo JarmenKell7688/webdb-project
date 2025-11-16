@@ -1,0 +1,175 @@
+﻿@model WebApplication3.Models.Gatepass
+@{
+    ViewData["Title"] = "Vehicle Registration Details";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-info text-white">
+                    <h3>@ViewData["Title"]</h3>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h5>
+                            Status:
+                            @if (Model.Status == "Pending")
+                            {
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            }
+                            else if (Model.Status == "Approved")
+                            {
+                                <span class="badge bg-success">Approved</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Denied</span>
+                            }
+                        </h5>
+                    </div>
+
+                    <hr />
+
+                    <h5 class="mb-3">Application Details</h5>
+                    <div class="mb-3">
+                        <strong>School Year:</strong>
+                        <p>@Model.SchoolYear</p>
+                    </div>
+
+                    <h5 class="mb-3">Personal Information</h5>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Name:</strong>
+                            <p>@Model.Name</p>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>ID:</strong>
+                            <p>@Model.CustomId</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Address:</strong>
+                        <p>@Model.Address</p>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Application Date:</strong>
+                            <p>@Model.ApplicationDate.ToString("MMM dd, yyyy")</p>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>User Type:</strong>
+                            <p>@Model.UserType</p>
+                        </div>
+                    </div>
+
+                    @if (Model.Course != null)
+                    {
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Course:</strong>
+                                <p>@Model.Course</p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Year:</strong>
+                                <p>@Model.Year</p>
+                            </div>
+                        </div>
+                    }
+
+                    @if (Model.Department != null)
+                    {
+                        <div class="mb-3">
+                            <strong>Department:</strong>
+                            <p>@Model.Department</p>
+                        </div>
+                    }
+
+                    <hr />
+
+                    <h5 class="mb-3">Vehicle Information</h5>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Vehicle Plate No:</strong>
+                            <p>@Model.VehiclePlateNo</p>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Registration Expiry:</strong>
+                            <p>@Model.RegistrationExpiryDate.ToString("MMM dd, yyyy")</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <strong>Vehicle Type:</strong>
+                            <p>@Model.VehicleType</p>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Maker:</strong>
+                            <p>@Model.Maker</p>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Color:</strong>
+                            <p>@Model.Color</p>
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.StudyLoadAttachment) || !string.IsNullOrEmpty(Model.RegistrationAttachment))
+                    {
+                        <hr />
+                        <h5 class="mb-3">Attachments</h5>
+
+                        @if (!string.IsNullOrEmpty(Model.StudyLoadAttachment))
+                        {
+                            <div class="mb-2">
+                                <strong>Study Load:</strong>
+                                <a href="@Model.StudyLoadAttachment" target="_blank" class="btn btn-sm btn-primary">View Document</a>
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrEmpty(Model.RegistrationAttachment))
+                        {
+                            <div class="mb-2">
+                                <strong>Registration:</strong>
+                                <a href="@Model.RegistrationAttachment" target="_blank" class="btn btn-sm btn-primary">View Document</a>
+                            </div>
+                        }
+                    }
+
+                    <div class="mb-3 mt-3">
+                        <strong>Request Date:</strong>
+                        <p>@Model.RequestDate.ToString("MMM dd, yyyy hh:mm tt")</p>
+                    </div>
+
+                    @if (Model.Status != "Pending")
+                    {
+                        <hr />
+                        <h5 class="mb-3">Admin Response</h5>
+
+                        @if (Model.ApprovalDate.HasValue)
+                        {
+                            <div class="mb-3">
+                                <strong>Response Date:</strong>
+                                <p>@Model.ApprovalDate.Value.ToString("MMM dd, yyyy hh:mm tt")</p>
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrEmpty(Model.AdminRemarks))
+                        {
+                            <div class="mb-3">
+                                <strong>Remarks:</strong>
+                                <p>@Model.AdminRemarks</p>
+                            </div>
+                        }
+                    }
+
+                    <div class="d-grid gap-2 mt-4">
+                        <a asp-action="MyRequests" class="btn btn-secondary">Back to My Requests</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
